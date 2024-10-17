@@ -1,0 +1,11 @@
+Implementação de uma lista de adjacência.
+
+Menu:
+
+1. Inserir cidade e vizinhos
+
+2. Remover cidade (vizinhos)
+
+3. Imprimir Cidade e Vizinhos
+
+4. Imprimir todo o grafo
