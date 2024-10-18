@@ -13,6 +13,7 @@ insert_final_newline = false
 
 # Arquivos padrão vscode e git
 .vscode
+.vscode/*
 .github
 
 # Ignorar arquivos de saída
