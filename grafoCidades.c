@@ -19,12 +19,12 @@ int freadINT (FILE *arquivo){
 void freadSTRING (FILE *arquivo, string *value){
     fscanf(arquivo, " %99[^\n]s" , &value);
 }
-float freadINT (FILE *arquivo){
+float freadFloat (FILE *arquivo){
     float value;
     fscanf(arquivo, "%f" , &value);
     return value;
 }
-double freadINT (FILE *arquivo){
+double freadDouble (FILE *arquivo){
     double value;
     fscanf(arquivo, "%f" , &value);
     return value;
@@ -89,6 +89,26 @@ void destruirGrafo(TGrafo *grafo) {
     free(grafo->cidades);
 }
 //=================================================
+
+void lerCidadesEVizinhos(TGrafo *grafo,FILE *arquivo){
+    int cont = 0;
+    string cidade, vizinho;
+    double distancia;
+
+    while (! feof(arquivo)){
+    freadSTRING(arquivo,cidade);
+    inserirCidade(grafo,cidade);
+
+    // while (!){
+    // freadSTRING(arquivo,vizinho);
+    // freadDouble(arquivo,distancia);
+    // inserirVizinho(grafo,cidade,vizinho,distancia);
+    // }
+    
+    cont++;
+    }
+    
+}
 
 //=================================================
 

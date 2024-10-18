@@ -1,82 +1,123 @@
 São Paulo
-Rio de Janeiro 440
-Campinas 100
+Rio de Janeiro 
+440
+Campinas
+100
 :
 Rio de Janeiro
-Niterói 20
-Petrópolis 60
-São Paulo 440
+Niterói
+20
+Petrópolis
+60
+São Paulo
+440
 :
 Niterói
-Rio de Janeiro 20
-Petrópolis 60
+Rio de Janeiro
+20
+Petrópolis
+60
 :
 Petrópolis
-Teresópolis 30
-Niterói 60
-Rio de Janeiro 60
+Teresópolis
+30
+Niterói
+60
+Rio de Janeiro
+60
 :
 Teresópolis
-Petrópolis 30
-Nova Friburgo 40
+Petrópolis
+30
+Nova Friburgo
+40
 :
 Nova Friburgo
-Teresópolis 40
-Cachoeiras de Macacu 25
+Teresópolis
+40
+Cachoeiras de Macacu
+25
 :
 Cachoeiras de Macacu
-Nova Friburgo 25
-Guapimirim 35
+Nova Friburgo
+25
+Guapimirim
+35
 :
 Guapimirim
-Cachoeiras de Macacu 35
-Magé 20
+Cachoeiras de Macacu
+35
+Magé
+20
 :
 Magé
-Guapimirim 20
-Duque de Caxias 25
+Guapimirim
+20
+Duque de Caxias
+25
 :
 Duque de Caxias
-Magé 25
-Nilópolis 15
+Magé
+25
+Nilópolis
+15
 :
 Nilópolis
-Duque de Caxias 15
-Mesquita 10
+Duque de Caxias
+15
+Mesquita
+10
 :
 Mesquita
-Nilópolis 10
-Belford Roxo 15
+Nilópolis
+10
+Belford Roxo
+15
 :
 Belford Roxo
-Mesquita 15
-São João de Meriti 10
+Mesquita
+15
+São João de Meriti
+10
 :
 São João de Meriti
-Belford Roxo 10
-Queimados 18
+Belford Roxo
+10
+Queimados
+18
 :
 Queimados
-São João de Meriti 18
-Japeri 20
+São João de Meriti
+18
+Japeri
+20
 :
 Japeri
-Queimados 20
-Paracambi 15
+Queimados
+20
+Paracambi
+15
 :
 Paracambi
-Japeri 15
-Mendes 25
+Japeri
+15
+Mendes
+25
 :
 Mendes
-Paracambi 25
-Paty do Alferes 20
+Paracambi
+25
+Paty do Alferes
+20
 :
 Paty do Alferes
-Mendes 20
-Vassouras 30
+Mendes
+20
+Vassouras
+30
 :
 Vassouras
-Paty do Alferes 30
-Barra do Piraí 40
-:
+Paty do Alferes
+30
+Barra do Piraí
+40
