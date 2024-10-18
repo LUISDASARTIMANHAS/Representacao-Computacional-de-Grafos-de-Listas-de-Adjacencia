@@ -8,6 +8,7 @@ FILE *abrirArquivo(char *nomeArq, char *modo) {
         printf("Erro ao abrir o arquivo %s\n", nomeArq);
         exit(1);
     }
+    printf("INFO: Arquivo %s Aberto! Bom uso.\n", nomeArq);
     return arquivo;
 }
 
@@ -113,6 +114,7 @@ void lerCidadesEVizinhos(TGrafo *grafo,FILE *arquivo){
     while (! feof(arquivo)){
     freadSTRING(arquivo,cidade);
     inserirCidade(grafo,cidade);
+    printf("%s",cidade);
 
     // while (!){
     // freadSTRING(arquivo,vizinho);
@@ -142,11 +144,11 @@ void mapeandoGrafo(TGrafo *grafo){
     // Fecha o arquivo
     fclose(arquivo);
 
-    // Exibe o grafo
-    exibirGrafo(grafo);
+    // // Exibe o grafo
+    // exibirGrafo(grafo);
 
-    // Libera a memória
-    destruirGrafo(grafo);
+    // // Libera a memória
+    // destruirGrafo(grafo);
 }
 //=================================================
 

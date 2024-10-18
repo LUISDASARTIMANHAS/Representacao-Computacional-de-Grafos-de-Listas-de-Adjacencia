@@ -6,12 +6,12 @@
       "type": "cppdbg",
       "request": "launch",
       "args": [],
-      "stopAtEntry": false,
+      "stopAtEntry": true,
       "externalConsole": true,
       "cwd": "d:/Users/2023122760328/Desktop/Meus Projetos Vscode/Representacao-Computacional-de-Grafos-de-Listas-de-Adjacencia",
-      "program": "d:/Users/2023122760328/Desktop/Meus Projetos Vscode/Representacao-Computacional-de-Grafos-de-Listas-de-Adjacencia/build/Debug/outDebug",
+      "program": "d:/Users/2023122760328/Desktop/Meus Projetos Vscode/Representacao-Computacional-de-Grafos-de-Listas-de-Adjacencia/builds/debug.exe",
       "MIMode": "lldb",
-      "miDebuggerPath": "C:\\MinGW\\bin",
+      "miDebuggerPath": "C:/MinGW/bin",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
