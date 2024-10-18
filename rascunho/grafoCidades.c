@@ -11,22 +11,37 @@ FILE *abrirArquivo(char *nomeArq, char *modo) {
     return arquivo;
 }
 
+/**
+ * @brief // input para captar int do arquivo
+ */
 int freadINT (FILE *arquivo){
     int value;
     fscanf(arquivo, "%d" , &value);
     return value;
 }
-void freadSTRING (FILE *arquivo, char destino[]){
-    fscanf(arquivo, " %99[^\n]s" , &destino);
+
+/**
+ * @brief // string para captar  do arquivo
+ */
+void freadSTRING (FILE *arquivo, string *value){
+    fscanf(arquivo, " %99[^\n]s" , &value);
 }
-float freadINT (FILE *arquivo){
+
+/**
+ * @brief // input para float Double do arquivo
+ */
+float freadFloat (FILE *arquivo){
     float value;
     fscanf(arquivo, "%f" , &value);
     return value;
 }
-double freadINT (FILE *arquivo){
+
+/**
+ * @brief // input para captar Double do arquivo
+ */
+double freadDouble (FILE *arquivo){
     double value;
-    fscanf(arquivo, "%f" , &value);
+    fscanf(arquivo, "%lf" , &value);
     return value;
 }
 

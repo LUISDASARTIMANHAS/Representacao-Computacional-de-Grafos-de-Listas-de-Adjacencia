@@ -11,25 +11,40 @@ FILE *abrirArquivo(char *nomeArq, char *modo) {
     return arquivo;
 }
 
+
+/**
+ * @brief // input para captar int do arquivo
+ */
 int freadINT (FILE *arquivo){
     int value;
     fscanf(arquivo, "%d" , &value);
     return value;
 }
+
+/**
+ * @brief // string para captar  do arquivo
+ */
 void freadSTRING (FILE *arquivo, string *value){
     fscanf(arquivo, " %99[^\n]s" , &value);
 }
+
+/**
+ * @brief // input para float Double do arquivo
+ */
 float freadFloat (FILE *arquivo){
     float value;
     fscanf(arquivo, "%f" , &value);
     return value;
 }
+
+/**
+ * @brief // input para captar Double do arquivo
+ */
 double freadDouble (FILE *arquivo){
     double value;
-    fscanf(arquivo, "%f" , &value);
+    fscanf(arquivo, "%lf" , &value);
     return value;
 }
-
 //=================================================
 // Inicializa o grafo com uma capacidade inicial de cidades
 void inicializarGrafo(TGrafo *grafo, int capacidade) {
