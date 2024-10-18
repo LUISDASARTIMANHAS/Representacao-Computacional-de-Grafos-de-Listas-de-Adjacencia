@@ -65,6 +65,26 @@ FILE * abrirArquivo(char * nomeArq, char * modo) {
 /**
  * @brief // input para captar floats e inteiros do teclado do usuario
  */
+
+int freadINT (FILE *arquivo){
+    int value;
+    fscanf(arquivo, "%d" , &value);
+    return value;
+}
+void freadSTRING (FILE *arquivo, string *value){
+    fscanf(arquivo, " %99[^\n]s" , &value);
+}
+float freadINT (FILE *arquivo){
+    float value;
+    fscanf(arquivo, "%f" , &value);
+    return value;
+}
+double freadINT (FILE *arquivo){
+    double value;
+    fscanf(arquivo, "%f" , &value);
+    return value;
+}
+
 float input(){
     float value;
     scanf("%f", &value);
