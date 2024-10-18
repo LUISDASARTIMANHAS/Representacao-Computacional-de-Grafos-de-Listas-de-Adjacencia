@@ -10,6 +10,61 @@ FILE *abrirArquivo(char *nomeArq, char *modo) {
     }
     return arquivo;
 }
+
+int freadINT (FILE *arquivo){
+    int value;
+    fscanf(arquivo, "%d" , &value);
+    return value;
+}
+void freadSTRING (FILE *arquivo, char destino[]){
+    fscanf(arquivo, " %99[^\n]s" , &destino);
+}
+float freadINT (FILE *arquivo){
+    float value;
+    fscanf(arquivo, "%f" , &value);
+    return value;
+}
+double freadINT (FILE *arquivo){
+    double value;
+    fscanf(arquivo, "%f" , &value);
+    return value;
+}
+
+float input(){
+    float value;
+    scanf("%f", &value);
+    return value;
+}
+
+/**
+ * @brief // input para captar long long int do teclado do usuario
+ */
+long long int inputDLLD(){
+    long long int value;
+    scanf("%lld", &value);
+    return value;
+}
+
+/**
+ * @brief // input para captar Verdadeiro ou falso (Bloeano) do teclado do usuario
+ */
+float inputBoleano(){
+	int value;
+	do{
+		fflush(stdin);
+		scanf("%d", &value);
+	}while(value != 1 && value != 0);
+	return value;
+}
+
+/**
+ * @brief // input para captar Strings do teclado do usuario
+ */
+void inputS(char destino[]){
+    scanf(" %100[^\n]s", destino);
+}
+
+
 //=================================================
 // Inicializa o grafo com uma capacidade inicial de cidades
 void inicializarGrafo(TGrafo *grafo, int capacidade) {
@@ -99,7 +154,7 @@ void processarLinhaDeCidades(TGrafo *grafo, char *linha) {
 void lerCidadesEVizinhos(TGrafo *grafo, FILE *arquivo) {
     char linha[1024];  // Buffer para leitura de linha (ajustado para o formato linear com vírgulas)
 
-    while (fgets(linha, sizeof(linha), arquivo)) {
+    while (! feof(arquivo)) {
         linha[strcspn(linha, "\n")] = '\0';  // Remove o '\n' no final da linha
         if (strcmp(linha, ":") == 0 || strlen(linha) == 0) {
             continue;  // Pula linhas vazias ou com apenas ":"
@@ -126,7 +181,7 @@ void mapeandoGrafo(TGrafo *grafo){
     inicializarGrafo(grafo, 5);  // Inicializa com uma capacidade de 5 cidades
 
     // Abre o arquivo "cidades.txt"
-    FILE *arquivo = abrirArquivo("cidades.txt", "r");
+    FILE *arquivo = abrirArquivo("../data/cidades.txt", "r");
 
     // Ler todas as cidades, vizinhos e distâncias
     lerCidadesEVizinhos(grafo, arquivo);
@@ -140,6 +195,8 @@ void mapeandoGrafo(TGrafo *grafo){
     // Libera a memória
     destruirGrafo(grafo);
 }
+//=================================================
+
 //=================================================
 // Função principal (main)
 int main() {
