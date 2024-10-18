@@ -126,7 +126,7 @@ void mapeandoGrafo(TGrafo *grafo){
     inicializarGrafo(grafo, 5);  // Inicializa com uma capacidade de 5 cidades
 
     // Abre o arquivo "cidades.txt"
-    FILE *arquivo = abrirArquivo("cidades.txt", "r");
+    FILE *arquivo = abrirArquivo("../data/cidades.txt", "r");
 
     // Ler todas as cidades, vizinhos e distâncias
     lerCidadesEVizinhos(grafo, arquivo);
@@ -140,6 +140,8 @@ void mapeandoGrafo(TGrafo *grafo){
     // Libera a memória
     destruirGrafo(grafo);
 }
+//=================================================
+
 //=================================================
 // Função principal (main)
 int main() {
