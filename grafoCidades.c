@@ -106,44 +106,44 @@ void destruirGrafo(TGrafo *grafo) {
 }
 //=================================================
 
-void lerCidadesEVizinhos(TGrafo *grafo,FILE *arquivo){
-    int cont = 0;
-    string cidade, vizinho;
-    double distancia;
-    string frase;
+// void lerCidadesEVizinhos(TGrafo *grafo,FILE *arquivo){
+//     int cont = 0;
+//     string cidade, vizinho;
+//     double distancia;
+//     string frase;
 
-    while (! feof(arquivo)){
-    freadSTRING(arquivo,cidade);
-    inserirCidade(grafo,cidade);
-    printf("%s",cidade);
-
-    // while (!){
-    // freadSTRING(arquivo,vizinho);
-    // freadDouble(arquivo,distancia);
-    // inserirVizinho(grafo,cidade,vizinho,distancia);
-    // }
+//     while (! feof(arquivo)){
+//      while(strcmp(nome,":") != 0 &&!feof(arquivo)){
+//             freadSTRING(arquivo,&nome);
+//             freadSTRING(arquivo,&vizinho);
+//             distancia = freadDouble(arquivo);
+//             if(strcmp(vizinho,":") != 0){
+//                 inserir(grafo->cidades->vizinhos,nome,vizinho,distancia);  
+//             }
+            
+//         }
     
-    cont++;
-    }
+//     cont++;
+//     }
     
-}
+// }
 
 void inserir(TVizinho *vizinhos, char * nome, char* vizinho, double peso){
-    printf("Cidade mae: %s, cidade vizinha: %s, peso: %lf", nome, vizinho, peso);
+    printf("\nCidade mae: %s, cidade vizinha: %s, peso: %lf", nome, vizinho, peso);
 }
 
 //=================================================
 void inserirDadosDoArquivo(TGrafo *grafo, FILE *arquivo) {
-    int peso;
-    char nome[100];
-    char vizinho[100];
+    double distancia;
+    string nome;
+    string vizinho;
     while(!feof(arquivo)){
         while(strcmp(nome,":") != 0 &&!feof(arquivo)){
             fscanf(arquivo,"%[^\n]s",nome);
             fscanf(arquivo,"\n%[^\n]s",vizinho);
-            fscanf(arquivo,"%d",&peso);
+            fscanf(arquivo,"%ls",&distancia);
             if(strcmp(vizinho,":") != 0){
-                inserir(grafo->cidades->vizinhos,nome,vizinho,peso);  
+                inserir(grafo->cidades->vizinhos,nome,vizinho,distancia);  
             }
             
         }
