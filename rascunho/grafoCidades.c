@@ -1,6 +1,5 @@
 #include "grafoCidades.h"
-
-//=================================================
+//========================================================
 // Função para abrir um arquivo no modo especificado
 FILE *abrirArquivo(char *nomeArq, char *modo) {
     FILE *arquivo = fopen(nomeArq, modo);
@@ -8,113 +7,53 @@ FILE *abrirArquivo(char *nomeArq, char *modo) {
         printf("Erro ao abrir o arquivo %s\n", nomeArq);
         exit(1);
     }
+    printf("INFO: Arquivo %s Aberto! Bom uso.\n", nomeArq);
     return arquivo;
 }
-
-/**
- * @brief // input para captar int do arquivo
- */
-int freadINT (FILE *arquivo){
-    int value;
-    fscanf(arquivo, "%d" , &value);
-    return value;
-}
-
-/**
- * @brief // string para captar  do arquivo
- */
-void freadSTRING (FILE *arquivo, string *value){
-    fscanf(arquivo, " %99[^\n]s" , &value);
-}
-
-/**
- * @brief // input para float Double do arquivo
- */
-float freadFloat (FILE *arquivo){
-    float value;
-    fscanf(arquivo, "%f" , &value);
-    return value;
-}
-
-/**
- * @brief // input para captar Double do arquivo
- */
-double freadDouble (FILE *arquivo){
-    double value;
-    fscanf(arquivo, "%lf" , &value);
-    return value;
-}
-
-float input(){
-    float value;
-    scanf("%f", &value);
-    return value;
-}
-
-/**
- * @brief // input para captar long long int do teclado do usuario
- */
-long long int inputDLLD(){
-    long long int value;
-    scanf("%lld", &value);
-    return value;
-}
-
-/**
- * @brief // input para captar Verdadeiro ou falso (Bloeano) do teclado do usuario
- */
-float inputBoleano(){
-	int value;
-	do{
-		fflush(stdin);
-		scanf("%d", &value);
-	}while(value != 1 && value != 0);
-	return value;
-}
-
-/**
- * @brief // input para captar Strings do teclado do usuario
- */
-void inputS(char destino[]){
-    scanf(" %100[^\n]s", destino);
-}
-
-
-//=================================================
-// Inicializa o grafo com uma capacidade inicial de cidades
+//========================================================
+// Função para inicializar o grafo
 void inicializarGrafo(TGrafo *grafo, int capacidade) {
     grafo->cidades = (TCidade*) malloc(capacidade * sizeof(TCidade));
     grafo->numCidades = 0;
     grafo->capacidade = capacidade;
 }
-//=================================================
-// Insere uma cidade no grafo (adiciona um vértice)
+//========================================================
+// Função para inserir uma cidade no grafo
 void inserirCidade(TGrafo *grafo, string nomeCidade) {
-    if (grafo->numCidades >= grafo->capacidade) {
-        grafo->capacidade *= 2; // Dobra a capacidade se necessário
-        grafo->cidades = realloc(grafo->cidades, grafo->capacidade * sizeof(TCidade));
+    TCidade *guardaCidades = (TCidade *) realloc(grafo->cidades, grafo->capacidade * sizeof(TCidade));
+
+    if (buscarCidade(grafo, nomeCidade) != NULL) {
+        return;
+    }
+
+    if (grafo->numCidades == grafo->capacidade) {
+        grafo->capacidade *= 2;
+        grafo->cidades = guardaCidades;
     }
 
     strcpy(grafo->cidades[grafo->numCidades].nome, nomeCidade);
-    grafo->cidades[grafo->numCidades].vizinhos = NULL; // Inicializa sem vizinhos
+    grafo->cidades[grafo->numCidades].vizinhos = NULL;
     grafo->numCidades++;
 }
-//=================================================
-// Insere um vizinho em uma cidade
-void inserirVizinho(TGrafo *grafo, string nomeCidade, string nomeVizinho, float distancia) {
-    TCidade *cidade = buscarCidade(grafo, nomeCidade);
-    if (cidade == NULL) return;
-
-    // Cria um novo vizinho
-    TVizinho *novoVizinho = (TVizinho*) malloc(sizeof(TVizinho));
+//========================================================
+// Função para inserir um vizinho a uma cidade existente
+void inserirVizinho(TCidade *cidade, char *nomeVizinho, double distancia) {
+    TVizinho *novoVizinho = (TVizinho *) malloc(sizeof(TVizinho));
     strcpy(novoVizinho->nome, nomeVizinho);
     novoVizinho->distancia = distancia;
-    novoVizinho->prox = cidade->vizinhos; // Insere no início da lista
+    novoVizinho->prox = cidade->vizinhos;
     cidade->vizinhos = novoVizinho;
 }
-//=================================================
-// Busca uma cidade pelo nome
-TCidade* buscarCidade(TGrafo *grafo, string nomeCidade) {
+//========================================================
+// Função para inserir uma cidade e seus vizinhos no grafo
+void inserir(TGrafo *grafo, string nomeCidade, string nomeVizinho, double distancia) {
+    inserirCidade(grafo, nomeCidade);
+    TCidade *cidade = buscarCidade(grafo, nomeCidade);
+    inserirVizinho(cidade, nomeVizinho, distancia);
+}
+//========================================================
+// Função para buscar uma cidade pelo nome
+TCidade * buscarCidade(TGrafo *grafo, string nomeCidade) {
     for (int i = 0; i < grafo->numCidades; i++) {
         if (strcmp(grafo->cidades[i].nome, nomeCidade) == 0) {
             return &grafo->cidades[i];
@@ -122,11 +61,22 @@ TCidade* buscarCidade(TGrafo *grafo, string nomeCidade) {
     }
     return NULL;
 }
-//=================================================
-// Libera a memória alocada para o grafo
+//========================================================
+// Função para exibir todas as cidades e seus vizinhos
+void exibirGrafo(TGrafo *grafo) {
+    for (int i = 0; i < grafo->numCidades; i++) {
+        printf("Cidade: %s\n", grafo->cidades[i].nome);
+        TVizinho *vizinho = grafo->cidades[i].vizinhos;
+        while (vizinho != NULL) {
+            printf("  Vizinho: %s, Distância: %.2f\n", vizinho->nome, vizinho->distancia);
+            vizinho = vizinho->prox;
+        }
+    }
+}
+//========================================================
+// Função para destruir o grafo e liberar a memória
 void destruirGrafo(TGrafo *grafo) {
     for (int i = 0; i < grafo->numCidades; i++) {
-        // Libera a lista de vizinhos de cada cidade
         TVizinho *vizinho = grafo->cidades[i].vizinhos;
         while (vizinho != NULL) {
             TVizinho *temp = vizinho;
@@ -134,88 +84,139 @@ void destruirGrafo(TGrafo *grafo) {
             free(temp);
         }
     }
-
-    // Libera o vetor de cidades
     free(grafo->cidades);
 }
-//=================================================
-// Função auxiliar para separar as cidades e distâncias em uma linha
-void processarLinhaDeCidades(TGrafo *grafo, char *linha) {
-    char *token = strtok(linha, ",");  // Usa a vírgula como delimitador
-    char cidadeAtual[101];
-    strcpy(cidadeAtual, token);  // A primeira cidade é a cidade principal
-
-    inserirCidade(grafo, cidadeAtual);  // Insere a cidade principal
-
-    // Continua processando os vizinhos e distâncias
-    while (token != NULL) {
-        token = strtok(NULL, ",");  // Pega a próxima cidade vizinha ou distância
-        if (token == NULL || strcmp(token, ":") == 0) {
-            break;  // Se chegamos ao fim do bloco
-        }
-
-        char vizinhoAtual[101];
-        strcpy(vizinhoAtual, token);  // Vizinho
-
-        token = strtok(NULL, ",");  // Próximo token será a distância
-        if (token != NULL && strcmp(token, ":") != 0) {
-            float distancia = atof(token);  // Converte a string para float
-            inserirVizinho(grafo, cidadeAtual, vizinhoAtual, distancia);  // Insere o vizinho com a distância
+//========================================================
+// Função para ler o arquivo e popular o grafo
+void lerArquivo(TGrafo *grafo, FILE *arquivo) {
+    char nomeCidade[101], nomeVizinho[101];
+    double distancia;
+    while (!feof(arquivo)) {
+        if (fscanf(arquivo, " %100[^\n]\n", nomeCidade) == 1) {
+            while (fscanf(arquivo, " %100[^\n]\n", nomeVizinho) == 1) {
+                if (strcmp(nomeVizinho, ":") == 0) {
+                    break;
+                }
+                if (fscanf(arquivo, "%lf\n", &distancia) == 1) {
+                    inserir(grafo, nomeCidade, nomeVizinho, distancia);
+                }
+            }
         }
     }
 }
-//=================================================
-// 1ª etapa: Lê o arquivo e cria todas as cidades e seus vizinhos
-void lerCidadesEVizinhos(TGrafo *grafo, FILE *arquivo) {
-    char linha[1024];  // Buffer para leitura de linha (ajustado para o formato linear com vírgulas)
-
-    while (! feof(arquivo)) {
-        linha[strcspn(linha, "\n")] = '\0';  // Remove o '\n' no final da linha
-        if (strcmp(linha, ":") == 0 || strlen(linha) == 0) {
-            continue;  // Pula linhas vazias ou com apenas ":"
-        }
-
-        processarLinhaDeCidades(grafo, linha);  // Processa a linha para criar as cidades e vizinhos
-    }
-}
-//=================================================
-// Exibe o grafo (as cidades e seus vizinhos)
-void exibirGrafo(TGrafo *grafo) {
+//========================================================
+// Função para remover uma cidade do grafo
+void removerCidade(TGrafo *grafo, char *nomeCidade) {
+    int indice = -1;
     for (int i = 0; i < grafo->numCidades; i++) {
-        printf("Cidade: %s\n", grafo->cidades[i].nome);
-        TVizinho *vizinho = grafo->cidades[i].vizinhos;
-        while (vizinho != NULL) {
-            printf("  -> Vizinho: %s, Distância: %.2f\n", vizinho->nome, vizinho->distancia);
-            vizinho = vizinho->prox;
+        if (strcmp(grafo->cidades[i].nome, nomeCidade) == 0) {
+            indice = i;
+            break;
         }
-        printf("%s\n", CORTE);
     }
+
+    if (indice == -1) {
+        printf("Cidade '%s' não encontrada!\n", nomeCidade);
+        return;
+    }
+
+    // Remove todos os vizinhos da cidade
+    TVizinho *vizinho = grafo->cidades[indice].vizinhos;
+    while (vizinho != NULL) {
+        TVizinho *temp = vizinho;
+        vizinho = vizinho->prox;
+        free(temp);
+    }
+
+    // Remove a cidade e ajusta o vetor
+    for (int i = indice; i < grafo->numCidades - 1; i++) {
+        grafo->cidades[i] = grafo->cidades[i + 1];
+    }
+
+    grafo->numCidades--;
+    printf("Cidade '%s' removida com sucesso!\n", nomeCidade);
 }
-//=================================================
-void mapeandoGrafo(TGrafo *grafo){
-    inicializarGrafo(grafo, 5);  // Inicializa com uma capacidade de 5 cidades
+//========================================================
+// Menu CRUD para o grafo
+void menu(TGrafo *grafo) {
+    int opcao;
+    char nomeCidade[101], nomeVizinho[101];
+    double distancia;
 
-    // Abre o arquivo "cidades.txt"
-    FILE *arquivo = abrirArquivo("../data/cidades.txt", "r");
+    do {
+        printf("\n----- Menu de Operações -----\n");
+        printf("1. Inserir Cidade\n");
+        printf("2. Inserir Vizinho em Cidade\n");
+        printf("3. Exibir Grafo\n");
+        printf("4. Remover Cidade\n");
+        printf("5. Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+        getchar(); // Limpar o buffer do newline
 
-    // Ler todas as cidades, vizinhos e distâncias
-    lerCidadesEVizinhos(grafo, arquivo);
+        switch (opcao) {
+            case 1:
+                printf("Digite o nome da cidade a ser inserida: ");
+                fgets(nomeCidade, 100, stdin);
+                nomeCidade[strcspn(nomeCidade, "\n")] = '\0'; // Remove o newline
+                inserirCidade(grafo, nomeCidade);
+                break;
 
-    // Fecha o arquivo
-    fclose(arquivo);
+            case 2:
+                printf("Digite o nome da cidade que terá um vizinho: ");
+                fgets(nomeCidade, 100, stdin);
+                nomeCidade[strcspn(nomeCidade, "\n")] = '\0';
 
-    // Exibe o grafo
-    exibirGrafo(grafo);
+                if (buscarCidade(grafo, nomeCidade) == NULL) {
+                    printf("Cidade '%s' não encontrada!\n", nomeCidade);
+                    break;
+                }
 
-    // Libera a memória
-    destruirGrafo(grafo);
+                printf("Digite o nome do vizinho: ");
+                fgets(nomeVizinho, 100, stdin);
+                nomeVizinho[strcspn(nomeVizinho, "\n")] = '\0';
+
+                printf("Digite a distância para o vizinho: ");
+                scanf("%lf", &distancia);
+                getchar(); // Limpar o buffer
+
+                inserir(grafo, nomeCidade, nomeVizinho, distancia);
+                printf("Vizinho '%s' com distância %.2f adicionado à cidade '%s'.\n", nomeVizinho, distancia, nomeCidade);
+                break;
+
+            case 3:
+                exibirGrafo(grafo);
+                break;
+
+            case 4:
+                printf("Digite o nome da cidade a ser removida: ");
+                fgets(nomeCidade, 100, stdin);
+                nomeCidade[strcspn(nomeCidade, "\n")] = '\0';
+                removerCidade(grafo, nomeCidade);
+                break;
+
+            case 5:
+                printf("Saindo...\n");
+                destruirGrafo(grafo);
+                break;
+
+            default:
+                printf("Opção inválida! Tente novamente.\n");
+                break;
+        }
+    } while (opcao != 5);
 }
-//=================================================
-
-//=================================================
-// Função principal (main)
+//========================================================
 int main() {
     TGrafo grafo;
-    mapeandoGrafo(&grafo);
+    inicializarGrafo(&grafo, 20); 
+
+    FILE *arquivo = abrirArquivo("../data/cidades.txt", "r");
+
+    lerArquivo(&grafo,arquivo);
+    
+    // Executa o menu CRUD
+    menu(&grafo);
+
     return 0;
 }
