@@ -46,6 +46,19 @@ double freadDouble (FILE *arquivo){
     fscanf(arquivo, "%lf" , &value);
     return value;
 }
+
+// Função para exibir todas as cidades e seus vizinhos
+void exibirGrafo(TGrafo *grafo) {
+    for (int i = 0; i < grafo->numCidades; i++) {
+    printf("\nCidade: %s\n", grafo->cidades[i].nome);
+    TVizinho *vizinho = grafo->cidades[i].vizinhos;
+        while (vizinho != NULL) {
+        printf(" Vizinho: %s, Distância: %.2f\n", vizinho->nome, vizinho->distancia);
+        vizinho = vizinho->prox;
+        }
+    }
+}
+
 //=================================================
 // Inicializa o grafo com uma capacidade inicial de cidades
 void inicializarGrafo(TGrafo *grafo, int capacidade) {
@@ -54,29 +67,32 @@ void inicializarGrafo(TGrafo *grafo, int capacidade) {
     grafo->capacidade = capacidade;
 }
 //=================================================
-// Insere uma cidade no grafo (adiciona um vértice)
+// Função para inserir uma cidade no grafo
 void inserirCidade(TGrafo *grafo, string nomeCidade) {
-    if (grafo->numCidades >= grafo->capacidade) {
-        grafo->capacidade *= 2; // Dobra a capacidade se necessário
-        grafo->cidades = realloc(grafo->cidades, grafo->capacidade * sizeof(TCidade));
-    }
+TCidade *guardaCidades = (TCidade *) realloc(grafo->cidades, grafo->capacidade * sizeof(TCidade));
 
-    strcpy(grafo->cidades[grafo->numCidades].nome, nomeCidade);
-    grafo->cidades[grafo->numCidades].vizinhos = NULL; // Inicializa sem vizinhos
-    grafo->numCidades++;
+if (buscarCidade(grafo, nomeCidade) != NULL) {
+return;
 }
-//=================================================
-// Insere um vizinho em uma cidade
-void inserirVizinho(TGrafo *grafo, string nomeCidade, string nomeVizinho, float distancia) {
-    TCidade *cidade = buscarCidade(grafo, nomeCidade);
-    if (cidade == NULL) return;
 
-    // Cria um novo vizinho
-    TVizinho *novoVizinho = (TVizinho*) malloc(sizeof(TVizinho));
-    strcpy(novoVizinho->nome, nomeVizinho);
-    novoVizinho->distancia = distancia;
-    novoVizinho->prox = cidade->vizinhos; // Insere no início da lista
-    cidade->vizinhos = novoVizinho;
+if (grafo->numCidades == grafo->capacidade) {
+grafo->capacidade *= 2;
+grafo->cidades = guardaCidades;
+}
+
+strcpy(grafo->cidades[grafo->numCidades].nome, nomeCidade);
+grafo->cidades[grafo->numCidades].vizinhos = NULL;
+grafo->numCidades++;
+}
+
+//=================================================
+// Função para inserir um vizinho a uma cidade existente
+void inserirVizinho(TCidade *cidade, char *nomeVizinho, double distancia) {
+TVizinho *novoVizinho = (TVizinho *) malloc(sizeof(TVizinho));
+strcpy(novoVizinho->nome, nomeVizinho);
+novoVizinho->distancia = distancia;
+novoVizinho->prox = cidade->vizinhos;
+cidade->vizinhos = novoVizinho;
 }
 //=================================================
 // Busca uma cidade pelo nome
@@ -128,31 +144,27 @@ void destruirGrafo(TGrafo *grafo) {
     
 // }
 
-void print(TGrafo *grafo){
-    
-    // grafo->cidades->nome = nome;
-
-
-    // grafo->cidades->vizinhos->nome = vizinho;
-    // grafo->cidades->vizinhos->distancia = peso;
-
-    printf("\nCidade mae: %s, cidade vizinha: %s, peso: %lf", grafo->cidades->nome, grafo->cidades->vizinhos->nome,grafo->cidades->vizinhos->distancia);
+// Função para inserir uma cidade e seus vizinhos no grafo
+void inserir(TGrafo *grafo, string nomeCidade, string nomeVizinho, double distancia) {
+inserirCidade(grafo, nomeCidade);
+TCidade *cidade = buscarCidade(grafo, nomeCidade);
+inserirVizinho(cidade, nomeVizinho, distancia);
 }
 
 //=================================================
 void inserirDadosDoArquivo(TGrafo *grafo, FILE *arquivo) {
     double distancia;
-    string nome;
-    string vizinho;
+    string nomeCidade;
+    string nomeVizinho;
+
     while(!feof(arquivo)){
-        while(strcmp(nome,":") != 0 &&!feof(arquivo)){
-            fscanf(arquivo,"%[^\n]s",nome);
-                inserirCidade(grafo,nome);
-            fscanf(arquivo,"\n%[^\n]s",vizinho);
+        while(strcmp(nomeCidade,":") != 0 &&!feof(arquivo)){
+            fscanf(arquivo,"%[^\n]s",nomeCidade);
+            
+            fscanf(arquivo,"\n%[^\n]s",nomeVizinho);
             fscanf(arquivo,"%lf",&distancia);
-            if(strcmp(vizinho,":") != 0){
-                inserirVizinho(grafo, nome, vizinho,distancia);
-                print(grafo);  
+            if(strcmp(nomeVizinho,":") != 0){
+                inserir(grafo,nomeCidade,nomeVizinho,distancia);
             }
             
         }
@@ -162,13 +174,14 @@ void inserirDadosDoArquivo(TGrafo *grafo, FILE *arquivo) {
 
 //=================================================
 void mapeandoGrafo(TGrafo *grafo){
-    inicializarGrafo(grafo, 5);  // Inicializa com uma capacidade de 5 cidades
+    inicializarGrafo(grafo, 20);  // Inicializa com uma capacidade de 5 cidades
 
     // Abre o arquivo "cidades.txt"
     FILE *arquivo = abrirArquivo("../data/cidades.txt", "r");
 
     // Ler todas as cidades, vizinhos e distâncias
     inserirDadosDoArquivo(grafo,arquivo);
+    exibirGrafo(grafo);
 
     // Fecha o arquivo
     fclose(arquivo);
