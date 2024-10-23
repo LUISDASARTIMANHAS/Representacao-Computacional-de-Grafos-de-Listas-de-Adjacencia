@@ -93,19 +93,43 @@ void exibirGrafo(TGrafo *grafo) {
     }
 }
 
-int menu(){
-    printf("\n======= GRAFO DE CIDADES =======\n");
-    printf("1 - Inserir Cidade\n");
-    printf("2 - Inserir Vizinho\n");
-    printf("3 - Remover Vizinho e Cidade \n");
-    printf("4 - Imprimir Cidade e seu Vizinhos \n");
-    printf("5 - Imprimir Todo o Grafo\n");
-    printf("0 - Sair\n");
-    printf("=====================\n");
-    printf("Forma: ");
-    int opc = input();
+void menu(TGrafo *grafo){
+    int opc = -1;
+    while (opc != 0){
+        printf("\n======= GRAFO DE CIDADES =======\n");
+        printf("1 - Inserir Cidade\n");
+        printf("2 - Inserir Vizinho\n");
+        printf("3 - Remover Vizinho e Cidade \n");
+        printf("4 - Imprimir Cidade e seu Vizinhos \n");
+        printf("5 - Imprimir Todo o Grafo\n");
+        printf("0 - Sair\n");
+        printf("=====================\n");
+        printf("Forma: ");
+        opc = input();
 
-    return opc;
+            switch (opc){
+            case 1:
+                /* code */
+                break;
+            case 2:
+                /* code */
+                break;
+            case 3:
+                /* code */
+                break;
+            case 4:
+                /* code */
+                break;
+            case 5:
+                exibirGrafo(grafo);
+                break;
+            default:
+                printf("\n Opcao Invalida!");
+                break;
+            }
+    }
+    printf("\n Saindo e Salvando automaticamente...");
+    exit(0);
 }
 
 //=================================================
@@ -227,13 +251,13 @@ void mapeandoGrafo(TGrafo *grafo){
 
     // Abre o arquivo "cidades.txt"
     FILE *arquivo = abrirArquivo("../data/cidades.txt", "r");
-
     // Ler todas as cidades, vizinhos e distâncias
     inserirDadosDoArquivo(grafo,arquivo);
-    exibirGrafo(grafo);
+    
 
     // Fecha o arquivo
     fclose(arquivo);
+    menu(grafo);
 
     // // Exibe o grafo
     // exibirGrafo(grafo);
