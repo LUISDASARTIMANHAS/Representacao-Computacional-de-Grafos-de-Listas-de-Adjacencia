@@ -128,8 +128,15 @@ void destruirGrafo(TGrafo *grafo) {
     
 // }
 
-void inserir(TVizinho *vizinhos, char * nome, char* vizinho, double peso){
-    printf("\nCidade mae: %s, cidade vizinha: %s, peso: %lf", nome, vizinho, peso);
+void print(TGrafo *grafo){
+    
+    // grafo->cidades->nome = nome;
+
+
+    // grafo->cidades->vizinhos->nome = vizinho;
+    // grafo->cidades->vizinhos->distancia = peso;
+
+    printf("\nCidade mae: %s, cidade vizinha: %s, peso: %lf", grafo->cidades->nome, grafo->cidades->vizinhos->nome,grafo->cidades->vizinhos->distancia);
 }
 
 //=================================================
@@ -140,10 +147,12 @@ void inserirDadosDoArquivo(TGrafo *grafo, FILE *arquivo) {
     while(!feof(arquivo)){
         while(strcmp(nome,":") != 0 &&!feof(arquivo)){
             fscanf(arquivo,"%[^\n]s",nome);
+                inserirCidade(grafo,nome);
             fscanf(arquivo,"\n%[^\n]s",vizinho);
-            fscanf(arquivo,"%ls",&distancia);
+            fscanf(arquivo,"%lf",&distancia);
             if(strcmp(vizinho,":") != 0){
-                inserir(grafo->cidades->vizinhos,nome,vizinho,distancia);  
+                inserirVizinho(grafo, nome, vizinho,distancia);
+                print(grafo);  
             }
             
         }
