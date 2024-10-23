@@ -47,6 +47,40 @@ double freadDouble (FILE *arquivo){
     return value;
 }
 
+float input(){
+    float value;
+    scanf("%f", &value);
+    return value;
+}
+
+/**
+ * @brief // input para captar long long int do teclado do usuario
+ */
+long long int inputDLLD(){
+    long long int value;
+    scanf("%lld", &value);
+    return value;
+}
+
+/**
+ * @brief // input para captar Verdadeiro ou falso (Bloeano) do teclado do usuario
+ */
+float inputBoleano(){
+	int value;
+	do{
+		fflush(stdin);
+		scanf("%d", &value);
+	}while(value != 1 && value != 0);
+	return value;
+}
+
+/**
+ * @brief // input para captar Strings do teclado do usuario
+ */
+void inputS(char destino[]){
+    scanf(" %100[^\n]s", destino);
+}
+
 // Função para exibir todas as cidades e seus vizinhos
 void exibirGrafo(TGrafo *grafo) {
     for (int i = 0; i < grafo->numCidades; i++) {
@@ -57,6 +91,21 @@ void exibirGrafo(TGrafo *grafo) {
         vizinho = vizinho->prox;
         }
     }
+}
+
+int menu(){
+    printf("\n======= GRAFO DE CIDADES =======\n");
+    printf("1 - Inserir Cidade\n");
+    printf("2 - Inserir Vizinho\n");
+    printf("3 - Remover Vizinho e Cidade \n");
+    printf("4 - Imprimir Cidade e seu Vizinhos \n");
+    printf("5 - Imprimir Todo o Grafo\n");
+    printf("0 - Sair\n");
+    printf("=====================\n");
+    printf("Forma: ");
+    int opc = input();
+
+    return opc;
 }
 
 //=================================================
