@@ -110,6 +110,7 @@ void lerCidadesEVizinhos(TGrafo *grafo,FILE *arquivo){
     int cont = 0;
     string cidade, vizinho;
     double distancia;
+    string frase;
 
     while (! feof(arquivo)){
     freadSTRING(arquivo,cidade);
@@ -127,8 +128,27 @@ void lerCidadesEVizinhos(TGrafo *grafo,FILE *arquivo){
     
 }
 
-//=================================================
+void inserir(TVizinho *vizinhos, char * nome, char* vizinho, double peso){
+    printf("Cidade mae: %s, cidade vizinha: %s, peso: %lf", nome, vizinho, peso);
+}
 
+//=================================================
+void inserirDadosDoArquivo(TGrafo *grafo, FILE *arquivo) {
+    int peso;
+    char nome[100];
+    char vizinho[100];
+    while(!feof(arquivo)){
+        while(strcmp(nome,":") != 0 &&!feof(arquivo)){
+            fscanf(arquivo,"%[^\n]s",nome);
+            fscanf(arquivo,"\n%[^\n]s",vizinho);
+            fscanf(arquivo,"%d",&peso);
+            if(strcmp(vizinho,":") != 0){
+                inserir(grafo->cidades->vizinhos,nome,vizinho,peso);  
+            }
+            
+        }
+    }
+}
 //=================================================
 
 //=================================================
@@ -139,7 +159,7 @@ void mapeandoGrafo(TGrafo *grafo){
     FILE *arquivo = abrirArquivo("../data/cidades.txt", "r");
 
     // Ler todas as cidades, vizinhos e distâncias
-    lerCidadesEVizinhos(grafo, arquivo);
+    inserirDadosDoArquivo(grafo,arquivo);
 
     // Fecha o arquivo
     fclose(arquivo);
