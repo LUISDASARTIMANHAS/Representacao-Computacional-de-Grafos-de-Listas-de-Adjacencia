@@ -109,7 +109,9 @@ void menu(TGrafo *grafo){
 
             switch (opc){
             case 1:
-                /* code */
+                string nomeCidade;
+                inputS(nomeCidade);
+                inserirCidade(grafo, nomeCidade);
                 break;
             case 2:
                 /* code */
@@ -178,21 +180,7 @@ TCidade* buscarCidade(TGrafo *grafo, string nomeCidade) {
     return NULL;
 }
 //=================================================
-// Libera a memória alocada para o grafo
-void destruirGrafo(TGrafo *grafo) {
-    for (int i = 0; i < grafo->numCidades; i++) {
-        // Libera a lista de vizinhos de cada cidade
-        TVizinho *vizinho = grafo->cidades[i].vizinhos;
-        while (vizinho != NULL) {
-            TVizinho *temp = vizinho;
-            vizinho = vizinho->prox;
-            free(temp);
-        }
-    }
 
-    // Libera o vetor de cidades
-    free(grafo->cidades);
-}
 //=================================================
 
 // void lerCidadesEVizinhos(TGrafo *grafo,FILE *arquivo){
