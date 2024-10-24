@@ -180,7 +180,60 @@ TCidade* buscarCidade(TGrafo *grafo, string nomeCidade) {
     return NULL;
 }
 //=================================================
+void removerCidade(TGrafo *grafo, char *nomeCidade) {
+    int indice = -1;
+    int i;
+    // Encontra o índice da cidade a ser removida
+    for (i = 0; i < grafo->numCidades; i++) {
+        if (strcmp(grafo->cidades[i].nome, nomeCidade) == 0) {
+            indice = i;
+            break;
+        }
+    }
 
+    if (indice == -1) {
+        printf("Cidade '%s' não encontrada!\n", nomeCidade);
+        return;
+    }
+
+    // Remove todos os vizinhos da cidade a ser excluída
+    TVizinho *vizinho = grafo->cidades[indice].vizinhos;
+    while (vizinho != NULL) {
+        TVizinho *temp = vizinho;
+        vizinho = vizinho->prox;
+        free(temp);
+    }
+
+    // Remover a cidade como vizinha de outras cidades
+    for (i = 0; i < grafo->numCidades; i++) {
+        if (i != indice) {  // Não é necessário atualizar a cidade que está sendo removida
+            TVizinho *atual = grafo->cidades[i].vizinhos;
+            TVizinho *anterior = NULL;
+            while (atual != NULL) {
+                if (strcmp(atual->nome, nomeCidade) == 0) {
+                    // Remover o vizinho
+                    if (anterior == NULL) { // Primeiro da lista de vizinhos
+                        grafo->cidades[i].vizinhos = atual->prox;
+                    } else {
+                        anterior->prox = atual->prox;
+                    }
+                    free(atual);
+                    break;  // Como os nomes de vizinhos são únicos, saímos após encontrar
+                }
+                anterior = atual;
+                atual = atual->prox;
+            }
+        }
+    }
+
+    // Remove a cidade do vetor
+    for (i = indice; i < grafo->numCidades - 1; i++) {
+        grafo->cidades[i] = grafo->cidades[i + 1];
+    }
+
+    grafo->numCidades--;
+    printf("Cidade '%s' removida com sucesso e removida da lista de vizinhos de outras cidades!\n", nomeCidade);
+}
 //=================================================
 
 // void lerCidadesEVizinhos(TGrafo *grafo,FILE *arquivo){
