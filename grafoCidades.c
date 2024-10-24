@@ -320,6 +320,12 @@ void deletarCidade(TGrafo *grafo){
     validarCidade(nomeCidade);
     removerCidade(grafo,nomeCidade);
 }
+
+void exibirCidadeEVizinho(TGrafo *grafo){
+    string nomeCidade;
+    validarCidade(nomeCidade);
+    exibirCidade(grafo,nomeCidade);
+}
 //=================================================
 void menu(TGrafo *grafo){
     int opc = -1;
@@ -346,9 +352,7 @@ void menu(TGrafo *grafo){
                 deletarCidade(grafo);
                 break;
             case 4:
-                validarCidade(nomeCidade);
-                exibirCidade(grafo,nomeCidade);
-                
+                exibirCidadeEVizinho(grafo);
                 break;
             case 5:
                 exibirGrafo(grafo);
