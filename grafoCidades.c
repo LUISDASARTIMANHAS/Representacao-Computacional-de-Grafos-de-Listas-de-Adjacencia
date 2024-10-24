@@ -326,6 +326,10 @@ void exibirCidadeEVizinho(TGrafo *grafo){
     validarCidade(nomeCidade);
     exibirCidade(grafo,nomeCidade);
 }
+
+void autosave(TGrafo grafo){
+
+}
 //=================================================
 void menu(TGrafo *grafo){
     int opc = -1;
@@ -363,6 +367,7 @@ void menu(TGrafo *grafo){
             }
     }
     printf("\n Saindo e Salvando automaticamente...");
+    autosave(grafo);
     exit(0);
 }
 //=================================================
