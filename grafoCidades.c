@@ -52,6 +52,11 @@ float input(){
     scanf("%f", &value);
     return value;
 }
+double inputDouble(){
+    double value;
+    scanf("%lf", &value);
+    return value;
+}
 
 /**
  * @brief // input para captar long long int do teclado do usuario
@@ -123,19 +128,19 @@ grafo->numCidades++;
 // Função para inserir um vizinho a uma cidade existente
 void inserirVizinho(TGrafo *grafo,char *nomeCidade, char *nomeVizinho, double distancia) {
     TVizinho *novoVizinho = (TVizinho *) malloc(sizeof(TVizinho));
-    TVizinho *novoVizinhoCidade = (TVizinho *) malloc(sizeof(TVizinho));
-    TCidade *cidade = buscarCidade(grafo, nomeCidade);
-    TCidade *cidadeVizinha = buscarCidade(grafo, nomeVizinho);
+    TCidade *cidadeVizinha = buscarCidade(grafo, nomeCidade);
+
+    if (cidadeVizinha == NULL) {
+        printf("\n Cidade Vizinha '%s' não encontrada!\n", nomeVizinho);
+        return;
+    }
 
     strcpy(novoVizinho->nome, nomeVizinho);
     novoVizinho->distancia = distancia;
-    novoVizinho->prox = cidade->vizinhos;
-    cidade->vizinhos = novoVizinho;
+    novoVizinho->prox = cidadeVizinha->vizinhos;
+    cidadeVizinha->vizinhos = novoVizinho;
 
-    // strcpy(novoVizinhoCidade->nome, nomeCidade);
-    // novoVizinhoCidade->distancia = distancia;
-    // novoVizinhoCidade->prox = cidadeVizinha->vizinhos;
-    // cidadeVizinha->vizinhos = novoVizinhoCidade;
+    printf("\n Vizinho %s Inserida!",nomeVizinho);
 }
 //=================================================
 // Busca uma cidade pelo nome
@@ -146,7 +151,6 @@ TCidade* buscarCidade(TGrafo *grafo, string nomeCidade) {
         }
     }
     
-    printf("\n ERRO: Falha ao buscar Cidade. NULL");
     return NULL;
 }
 //=================================================
@@ -254,6 +258,12 @@ void inserirDadosDoArquivo(TGrafo *grafo, FILE *arquivo) {
     }
 }
 //=================================================
+double validarPeso(){
+    double value;
+    printf("\n Digite a Distancia entre as cidades: ");
+    value = inputDouble();
+    return value;
+}
 void validarCidade(char *destino){
     printf("\n Digite a Cidade: ");
     inputS(destino);
@@ -282,7 +292,7 @@ void menu(TGrafo *grafo){
         printf("5 - Imprimir Todo o Grafo\n");
         printf("0 - Sair\n");
         printf("=====================\n");
-        printf("Forma: ");
+        printf("Insira uma opcao: ");
         opc = input();
 
             switch (opc){
@@ -293,7 +303,9 @@ void menu(TGrafo *grafo){
             case 2:
                 validarCidade(nomeCidade);
                 validarVizinho(grafo,nomeCidade, nomeVizinho);
+                distancia = validarPeso();
                 inserirVizinho(grafo,nomeCidade,nomeVizinho,distancia);
+                inserirVizinho(grafo,nomeVizinho,nomeCidade,distancia);
                 break;
             case 3:
                 validarCidade(nomeCidade);
