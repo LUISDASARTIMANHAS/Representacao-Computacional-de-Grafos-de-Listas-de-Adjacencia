@@ -278,12 +278,31 @@ void validarVizinho(TGrafo *grafo,string nomeCidade, char *destino){
     printf("\n Digite o Vizinho: ");
     inputS(destino);
 }
+
+void cadastrarCidade(TGrafo *grafo){
+    string nomeCidade;
+    validarCidade(nomeCidade);
+    inserirCidade(grafo, nomeCidade);
+}
+void cadastrarVizinho(TGrafo *grafo){
+    string nomeCidade, nomeVizinho;
+    double distancia;
+
+    validarCidade(nomeCidade);
+    validarVizinho(grafo,nomeCidade, nomeVizinho);
+    distancia = validarPeso();
+    inserirVizinho(grafo,nomeCidade,nomeVizinho,distancia);
+    inserirVizinho(grafo,nomeVizinho,nomeCidade,distancia);
+}
+void deletarCidade(TGrafo *grafo){
+    string nomeCidade;
+    validarCidade(nomeCidade);
+    removerCidade(grafo,nomeCidade);
+}
 //=================================================
 void menu(TGrafo *grafo){
     int opc = -1;
     while (opc != 0){
-        string nomeCidade, nomeVizinho;
-        double distancia;
         printf("\n======= GRAFO DE CIDADES =======\n");
         printf("1 - Inserir Cidade\n");
         printf("2 - Inserir Vizinho\n");
@@ -297,22 +316,16 @@ void menu(TGrafo *grafo){
 
             switch (opc){
             case 1:
-                validarCidade(nomeCidade);
-                inserirCidade(grafo, nomeCidade);
+                cadastrarCidade(grafo);
                 break;
             case 2:
-                validarCidade(nomeCidade);
-                validarVizinho(grafo,nomeCidade, nomeVizinho);
-                distancia = validarPeso();
-                inserirVizinho(grafo,nomeCidade,nomeVizinho,distancia);
-                inserirVizinho(grafo,nomeVizinho,nomeCidade,distancia);
+                cadastrarVizinho(grafo);
                 break;
             case 3:
-                validarCidade(nomeCidade);
-                removerCidade(grafo,nomeCidade);
+                deletarCidade(grafo);
                 break;
             case 4:
-                /* code */
+                
                 break;
             case 5:
                 exibirGrafo(grafo);
