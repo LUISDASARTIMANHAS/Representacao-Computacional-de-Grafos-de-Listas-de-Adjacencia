@@ -124,6 +124,27 @@ grafo->cidades[grafo->numCidades].vizinhos = NULL;
 grafo->numCidades++;
 }
 
+
+void exibirCidade(TGrafo *grafo, char *nomeCidade) {
+    TCidade *cidade = buscarCidade(grafo, nomeCidade);
+
+    if (cidade == NULL) {
+        printf("Cidade '%s' não encontrada!\n", nomeCidade);
+        return;
+    }
+
+    printf("Cidade: %s\n", cidade->nome);
+    TVizinho *vizinho = cidade->vizinhos;
+    if (vizinho == NULL) {
+        printf("  Não possui vizinhos cadastrados.\n");
+    } else {
+        while (vizinho != NULL) {
+            printf("  Vizinho: %s, Distância: %.2f\n", vizinho->nome, vizinho->distancia);
+            vizinho = vizinho->prox;
+        }
+    }
+}
+
 //=================================================
 // Função para inserir um vizinho a uma cidade existente
 void inserirVizinho(TGrafo *grafo,char *nomeCidade, char *nomeVizinho, double distancia) {
@@ -325,6 +346,8 @@ void menu(TGrafo *grafo){
                 deletarCidade(grafo);
                 break;
             case 4:
+                validarCidade(nomeCidade);
+                exibirCidade(grafo,nomeCidade);
                 
                 break;
             case 5:
