@@ -93,47 +93,6 @@ void exibirGrafo(TGrafo *grafo) {
     }
 }
 
-void menu(TGrafo *grafo){
-    int opc = -1;
-    while (opc != 0){
-        printf("\n======= GRAFO DE CIDADES =======\n");
-        printf("1 - Inserir Cidade\n");
-        printf("2 - Inserir Vizinho\n");
-        printf("3 - Remover Vizinho e Cidade \n");
-        printf("4 - Imprimir Cidade e seu Vizinhos \n");
-        printf("5 - Imprimir Todo o Grafo\n");
-        printf("0 - Sair\n");
-        printf("=====================\n");
-        printf("Forma: ");
-        opc = input();
-
-            switch (opc){
-            case 1:
-                string nomeCidade;
-                inputS(nomeCidade);
-                inserirCidade(grafo, nomeCidade);
-                break;
-            case 2:
-                /* code */
-                break;
-            case 3:
-                /* code */
-                break;
-            case 4:
-                /* code */
-                break;
-            case 5:
-                exibirGrafo(grafo);
-                break;
-            default:
-                printf("\n Opcao Invalida!");
-                break;
-            }
-    }
-    printf("\n Saindo e Salvando automaticamente...");
-    exit(0);
-}
-
 //=================================================
 // Inicializa o grafo com uma capacidade inicial de cidades
 void inicializarGrafo(TGrafo *grafo, int capacidade) {
@@ -162,12 +121,21 @@ grafo->numCidades++;
 
 //=================================================
 // Função para inserir um vizinho a uma cidade existente
-void inserirVizinho(TCidade *cidade, char *nomeVizinho, double distancia) {
-TVizinho *novoVizinho = (TVizinho *) malloc(sizeof(TVizinho));
-strcpy(novoVizinho->nome, nomeVizinho);
-novoVizinho->distancia = distancia;
-novoVizinho->prox = cidade->vizinhos;
-cidade->vizinhos = novoVizinho;
+void inserirVizinho(TGrafo *grafo,char *nomeCidade, char *nomeVizinho, double distancia) {
+    TVizinho *novoVizinho = (TVizinho *) malloc(sizeof(TVizinho));
+    TVizinho *novoVizinhoCidade = (TVizinho *) malloc(sizeof(TVizinho));
+    TCidade *cidade = buscarCidade(grafo, nomeCidade);
+    TCidade *cidadeVizinha = buscarCidade(grafo, nomeVizinho);
+
+    strcpy(novoVizinho->nome, nomeVizinho);
+    novoVizinho->distancia = distancia;
+    novoVizinho->prox = cidade->vizinhos;
+    cidade->vizinhos = novoVizinho;
+
+    // strcpy(novoVizinhoCidade->nome, nomeCidade);
+    // novoVizinhoCidade->distancia = distancia;
+    // novoVizinhoCidade->prox = cidadeVizinha->vizinhos;
+    // cidadeVizinha->vizinhos = novoVizinhoCidade;
 }
 //=================================================
 // Busca uma cidade pelo nome
@@ -177,6 +145,8 @@ TCidade* buscarCidade(TGrafo *grafo, string nomeCidade) {
             return &grafo->cidades[i];
         }
     }
+    
+    printf("\n ERRO: Falha ao buscar Cidade. NULL");
     return NULL;
 }
 //=================================================
@@ -261,8 +231,7 @@ void removerCidade(TGrafo *grafo, char *nomeCidade) {
 // Função para inserir uma cidade e seus vizinhos no grafo
 void inserir(TGrafo *grafo, string nomeCidade, string nomeVizinho, double distancia) {
 inserirCidade(grafo, nomeCidade);
-TCidade *cidade = buscarCidade(grafo, nomeCidade);
-inserirVizinho(cidade, nomeVizinho, distancia);
+inserirVizinho(grafo,nomeCidade, nomeVizinho, distancia);
 }
 
 //=================================================
@@ -285,7 +254,65 @@ void inserirDadosDoArquivo(TGrafo *grafo, FILE *arquivo) {
     }
 }
 //=================================================
+void validarCidade(char *destino){
+    printf("\n Digite a Cidade: ");
+    inputS(destino);
+}
+void validarVizinho(TGrafo *grafo,string nomeCidade, char *destino){
+    TCidade *cidade = buscarCidade(grafo, nomeCidade);
 
+    if (cidade == NULL) {
+        printf("Cidade '%s' não encontrada!\n", nomeCidade);
+        return;
+    }
+    printf("\n Digite o Vizinho: ");
+    inputS(destino);
+}
+//=================================================
+void menu(TGrafo *grafo){
+    int opc = -1;
+    while (opc != 0){
+        string nomeCidade, nomeVizinho;
+        double distancia;
+        printf("\n======= GRAFO DE CIDADES =======\n");
+        printf("1 - Inserir Cidade\n");
+        printf("2 - Inserir Vizinho\n");
+        printf("3 - Remover Vizinho e Cidade \n");
+        printf("4 - Imprimir Cidade e seu Vizinhos \n");
+        printf("5 - Imprimir Todo o Grafo\n");
+        printf("0 - Sair\n");
+        printf("=====================\n");
+        printf("Forma: ");
+        opc = input();
+
+            switch (opc){
+            case 1:
+                validarCidade(nomeCidade);
+                inserirCidade(grafo, nomeCidade);
+                break;
+            case 2:
+                validarCidade(nomeCidade);
+                validarVizinho(grafo,nomeCidade, nomeVizinho);
+                inserirVizinho(grafo,nomeCidade,nomeVizinho,distancia);
+                break;
+            case 3:
+                validarCidade(nomeCidade);
+                removerCidade(grafo,nomeCidade);
+                break;
+            case 4:
+                /* code */
+                break;
+            case 5:
+                exibirGrafo(grafo);
+                break;
+            default:
+                printf("\n Opcao Invalida!");
+                break;
+            }
+    }
+    printf("\n Saindo e Salvando automaticamente...");
+    exit(0);
+}
 //=================================================
 void mapeandoGrafo(TGrafo *grafo){
     inicializarGrafo(grafo, 20);  // Inicializa com uma capacidade de 5 cidades
@@ -306,8 +333,6 @@ void mapeandoGrafo(TGrafo *grafo){
     // // Libera a memória
     // destruirGrafo(grafo);
 }
-//=================================================
-
 //=================================================
 // Função principal (main)
 int main() {

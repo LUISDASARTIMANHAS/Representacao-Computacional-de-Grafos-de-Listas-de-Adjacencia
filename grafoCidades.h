@@ -37,8 +37,8 @@ typedef struct tipoGrafo {
 FILE *abrirArquivo(char *nomeArq, char *modo);
 void inicializarGrafo(TGrafo *grafo, int capacidade);
 void inserirCidade(TGrafo *grafo, string nomeCidade);
-void inserirVizinho(TCidade *cidade, char *nomeVizinho, double distancia);
+void inserirVizinho(TGrafo *grafo,string nomeCidade, char *nomeVizinho, double distancia);
 void lerArquivo(TGrafo *grafo, FILE *arquivo);
 TCidade* buscarCidade(TGrafo *grafo, string nomeCidade);
 void exibirGrafo(TGrafo *grafo);
-void destruirGrafo(TGrafo *grafo);
+void removerCidade(TGrafo *grafo, char *nomeCidade);
