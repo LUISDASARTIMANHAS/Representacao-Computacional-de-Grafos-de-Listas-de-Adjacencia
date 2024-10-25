@@ -271,17 +271,10 @@ void mapeandoGrafo(TGrafo *grafo){
     FILE *arquivo = abrirArquivo("../data/cidades.txt", "r");
     // Ler todas as cidades, vizinhos e distâncias
     inserirDadosDoArquivo(grafo,arquivo);
-    
 
     // Fecha o arquivo
     fclose(arquivo);
     menu(grafo);
-
-    // // Exibe o grafo
-    // exibirGrafo(grafo);
-
-    // // Libera a memória
-    // destruirGrafo(grafo);
 }
 //=================================================
 // Função principal (main)

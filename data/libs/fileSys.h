@@ -8,7 +8,6 @@
 #include <string.h>
 #include <time.h>
 
-
 typedef char string[101];
 
 // Funções que serão implementadas no arquivo .c

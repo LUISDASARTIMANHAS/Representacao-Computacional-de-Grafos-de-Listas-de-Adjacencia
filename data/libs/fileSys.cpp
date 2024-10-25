@@ -11,6 +11,18 @@ FILE *abrirArquivo(char *nomeArq, char *modo) {
     return arquivo;
 }
 
+    // fprintf(arquivo, "\n%3d %-50s %5d %10.2f", cod, nome, qtde, preco  );
+
+/**
+ * @brief // input para captar int do arquivo
+ */
+int freadINT (FILE *arquivo){
+    int value;
+    // fprintf(arquivo, "\n%3d %-50s %5d %10.2f", cod, nome, qtde, preco  );
+    fscanf(arquivo, "%d" , &value);
+    return value;
+}
+
 
 /**
  * @brief // input para captar int do arquivo
