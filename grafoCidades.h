@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
+#include "data/libs/fileSys.cpp"
 
 #define INICIO "------------INICIO------------"
 #define RESULTADO "------------RESULTADO------------"

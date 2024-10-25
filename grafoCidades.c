@@ -1,91 +1,5 @@
 #include "grafoCidades.h"
 
-//=================================================
-// Função para abrir um arquivo no modo especificado
-FILE *abrirArquivo(char *nomeArq, char *modo) {
-    FILE *arquivo = fopen(nomeArq, modo);
-    if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo %s\n", nomeArq);
-        exit(1);
-    }
-    printf("INFO: Arquivo %s Aberto! Bom uso.\n", nomeArq);
-    return arquivo;
-}
-
-
-/**
- * @brief // input para captar int do arquivo
- */
-int freadINT (FILE *arquivo){
-    int value;
-    fscanf(arquivo, "%d" , &value);
-    return value;
-}
-
-/**
- * @brief // string para captar  do arquivo
- */
-void freadSTRING (FILE *arquivo, string *value){
-    fscanf(arquivo, " %99[^\n]s" , &value);
-}
-
-/**
- * @brief // input para float Double do arquivo
- */
-float freadFloat (FILE *arquivo){
-    float value;
-    fscanf(arquivo, "%f" , &value);
-    return value;
-}
-
-/**
- * @brief // input para captar Double do arquivo
- */
-double freadDouble (FILE *arquivo){
-    double value;
-    fscanf(arquivo, "%lf" , &value);
-    return value;
-}
-
-float input(){
-    float value;
-    scanf("%f", &value);
-    return value;
-}
-double inputDouble(){
-    double value;
-    scanf("%lf", &value);
-    return value;
-}
-
-/**
- * @brief // input para captar long long int do teclado do usuario
- */
-long long int inputDLLD(){
-    long long int value;
-    scanf("%lld", &value);
-    return value;
-}
-
-/**
- * @brief // input para captar Verdadeiro ou falso (Bloeano) do teclado do usuario
- */
-float inputBoleano(){
-	int value;
-	do{
-		fflush(stdin);
-		scanf("%d", &value);
-	}while(value != 1 && value != 0);
-	return value;
-}
-
-/**
- * @brief // input para captar Strings do teclado do usuario
- */
-void inputS(char destino[]){
-    scanf(" %100[^\n]s", destino);
-}
-
 // Função para exibir todas as cidades e seus vizinhos
 void exibirGrafo(TGrafo *grafo) {
     for (int i = 0; i < grafo->numCidades; i++) {
@@ -231,28 +145,6 @@ void removerCidade(TGrafo *grafo, char *nomeCidade) {
 }
 //=================================================
 
-// void lerCidadesEVizinhos(TGrafo *grafo,FILE *arquivo){
-//     int cont = 0;
-//     string cidade, vizinho;
-//     double distancia;
-//     string frase;
-
-//     while (! feof(arquivo)){
-//      while(strcmp(nome,":") != 0 &&!feof(arquivo)){
-//             freadSTRING(arquivo,&nome);
-//             freadSTRING(arquivo,&vizinho);
-//             distancia = freadDouble(arquivo);
-//             if(strcmp(vizinho,":") != 0){
-//                 inserir(grafo->cidades->vizinhos,nome,vizinho,distancia);  
-//             }
-            
-//         }
-    
-//     cont++;
-//     }
-    
-// }
-
 // Função para inserir uma cidade e seus vizinhos no grafo
 void inserir(TGrafo *grafo, string nomeCidade, string nomeVizinho, double distancia) {
 inserirCidade(grafo, nomeCidade);
@@ -367,7 +259,7 @@ void menu(TGrafo *grafo){
             }
     }
     printf("\n Saindo e Salvando automaticamente...");
-    autosave(grafo);
+    // autosave(grafo);
     exit(0);
 }
 //=================================================

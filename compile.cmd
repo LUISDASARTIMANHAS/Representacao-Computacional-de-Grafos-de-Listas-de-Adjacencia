@@ -30,7 +30,18 @@ if "%fileName%"=="" (
 )
 set fullFileName=%fileName%.V%versao%
 
+if not exist "rascunho" (
+    mkdir "rascunho"
+)
+
 g++ -Wall -g3 -Wextra -static -static-libgcc -static-libstdc++ "rascunho/%fileName%.c" -o "builds/rascunho.exe"
+
+if not exist "builds" (
+    mkdir "builds"
+)
+if not exist "zip" (
+    mkdir "zip"
+)
 
 if exist "builds/debug.exe" (
    del "builds/debug.exe"
