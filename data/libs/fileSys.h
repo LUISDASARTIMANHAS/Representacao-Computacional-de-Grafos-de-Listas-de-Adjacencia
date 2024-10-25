@@ -16,6 +16,12 @@ int freadINT (FILE *arquivo);
 void freadSTRING (FILE *arquivo, char valdestino[]);
 float freadFloat (FILE *arquivo);
 double freadDouble (FILE *arquivo);
+
+void fWiriteINT (FILE *arquivo, int value);
+void fWiriteSTRING (FILE *arquivo, char value[]);
+void fWiriteFLOAT (FILE *arquivo, float value);
+void fWiriteDOUBLE (FILE *arquivo, double value);
+
 float input();
 double inputDouble();
 long long int inputDLLD();

@@ -220,9 +220,12 @@ void exibirCidadeEVizinho(TGrafo *grafo){
     exibirCidade(grafo,nomeCidade);
 }
 
-// void autosave(TGrafo grafo){
+void autosave(TGrafo *grafo){
+    FILE *arq = abrirArquivo("../data/cidades.txt","w");
 
-// }
+    fWiriteSTRING(arq,grafo->cidades->nome);
+    fclose(arq);
+}
 //=================================================
 void menu(TGrafo *grafo){
     int opc = -1;
@@ -260,7 +263,7 @@ void menu(TGrafo *grafo){
             }
     }
     printf("\n Saindo e Salvando automaticamente...");
-    // autosave(grafo);
+    autosave(grafo);
     exit(0);
 }
 //=================================================

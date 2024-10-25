@@ -14,15 +14,29 @@ FILE *abrirArquivo(char *nomeArq, char *modo) {
     // fprintf(arquivo, "\n%3d %-50s %5d %10.2f", cod, nome, qtde, preco  );
 
 /**
- * @brief // input para captar int do arquivo
+ * @brief // Escreve valores inteiros no arquivo
  */
-int freadINT (FILE *arquivo){
-    int value;
-    // fprintf(arquivo, "\n%3d %-50s %5d %10.2f", cod, nome, qtde, preco  );
-    fscanf(arquivo, "%d" , &value);
-    return value;
+void fWiriteINT (FILE *arquivo, int value){
+    fprintf(arquivo, "%d\n", value);
 }
-
+/**
+ * @brief // Escreve valores string no arquivo
+ */
+void fWiriteSTRING (FILE *arquivo, char value[]){
+    fprintf(arquivo, "%s\n", value);
+}
+/**
+ * @brief // Escreve valores string no arquivo
+ */
+void fWiriteFLOAT (FILE *arquivo, float value){
+    fprintf(arquivo, "%f\n", value);
+}
+/**
+ * @brief // Escreve valores string no arquivo
+ */
+void fWiriteDOUBLE (FILE *arquivo, double value){
+    fprintf(arquivo, "%lf\n", value);
+}
 
 /**
  * @brief // input para captar int do arquivo
