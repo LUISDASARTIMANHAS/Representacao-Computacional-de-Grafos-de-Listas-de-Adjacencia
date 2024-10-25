@@ -5,7 +5,6 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
-#include "data/libs/fileSys.cpp"
 
 #define INICIO "------------INICIO------------"
 #define RESULTADO "------------RESULTADO------------"
@@ -35,7 +34,6 @@ typedef struct tipoGrafo {
 } TGrafo;
 
 // Funções que serão implementadas no arquivo .c
-FILE *abrirArquivo(char *nomeArq, char *modo);
 void inicializarGrafo(TGrafo *grafo, int capacidade);
 void inserirCidade(TGrafo *grafo, string nomeCidade);
 void inserirVizinho(TGrafo *grafo,string nomeCidade, char *nomeVizinho, double distancia);

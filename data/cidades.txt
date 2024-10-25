@@ -1,39 +1,39 @@
-São Paulo
-Rio de Janeiro 
+Sao Paulo
+Rio de Janeiro
 440
 Campinas
 100
 :
 Rio de Janeiro
-Niterói
+Niteroi
 20
-Petrópolis
+Petropolis
 60
-São Paulo
+Sao Paulo
 440
 :
-Niterói
+Niteroi
 Rio de Janeiro
 20
-Petrópolis
+Petropolis
 60
 :
-Petrópolis
-Teresópolis
+Petropolis
+Teresopolis
 30
-Niterói
+Niteroi
 60
 Rio de Janeiro
 60
 :
-Teresópolis
-Petrópolis
+Teresopolis
+Petropolis
 30
 Nova Friburgo
 40
 :
 Nova Friburgo
-Teresópolis
+Teresopolis
 40
 Cachoeiras de Macacu
 25
@@ -47,29 +47,29 @@ Guapimirim
 Guapimirim
 Cachoeiras de Macacu
 35
-Magé
+Mage
 20
 :
-Magé
+Mage
 Guapimirim
 20
 Duque de Caxias
 25
 :
 Duque de Caxias
-Magé
+Mage
 25
-Nilópolis
+Nilopolis
 15
 :
-Nilópolis
+Nilopolis
 Duque de Caxias
 15
 Mesquita
 10
 :
 Mesquita
-Nilópolis
+Nilopolis
 10
 Belford Roxo
 15
@@ -77,17 +77,17 @@ Belford Roxo
 Belford Roxo
 Mesquita
 15
-São João de Meriti
+Sao Joao de Meriti
 10
 :
-São João de Meriti
+Sao Joao de Meriti
 Belford Roxo
 10
 Queimados
 18
 :
 Queimados
-São João de Meriti
+Sao Joao de Meriti
 18
 Japeri
 20
@@ -119,5 +119,5 @@ Vassouras
 Vassouras
 Paty do Alferes
 30
-Barra do Piraí
+Barra do Pirai
 40

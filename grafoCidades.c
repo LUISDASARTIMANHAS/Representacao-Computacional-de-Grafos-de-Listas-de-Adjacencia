@@ -1,5 +1,6 @@
 #include "grafoCidades.h"
 
+#include "data/libs/fileSys.cpp"
 // Função para exibir todas as cidades e seus vizinhos
 void exibirGrafo(TGrafo *grafo) {
     for (int i = 0; i < grafo->numCidades; i++) {
@@ -219,9 +220,9 @@ void exibirCidadeEVizinho(TGrafo *grafo){
     exibirCidade(grafo,nomeCidade);
 }
 
-void autosave(TGrafo grafo){
+// void autosave(TGrafo grafo){
 
-}
+// }
 //=================================================
 void menu(TGrafo *grafo){
     int opc = -1;

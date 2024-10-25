@@ -30,28 +30,20 @@ if "%fileName%"=="" (
 )
 set fullFileName=%fileName%.V%versao%
 
-if not exist "rascunho" (
-    mkdir "rascunho"
+:: Inicializa o repositório Git (se necessário)
+if not exist ".git" (
+    git init
+    git remote add origin https://github.com/LUISDASARTIMANHAS/OpenTTD-OST-Factorio-version.git
 )
 
-g++ -Wall -g3 -Wextra -static -static-libgcc -static-libstdc++ "rascunho/%fileName%.c" -o "builds/rascunho.exe"
+:: Verifica o status dos arquivos
+git status
 
-if not exist "builds" (
-    mkdir "builds"
-)
-if not exist "zip" (
-    mkdir "zip"
-)
+:: Adiciona todos os arquivos alterados, respeitando o .gitignore
+git add .
 
-if exist "builds/debug.exe" (
-   del "builds/debug.exe"
-)
-g++ -Wall -g3 -Wextra -static -static-libgcc -static-libstdc++ %fileName%.c -o "builds/debug.exe"
+:: Cria um commit com uma mensagem baseada no nome e versão do mod
+git commit -m "Automated commit for %fullFileName%"
 
-g++ -Wall -g3 -Wextra -static -static-libgcc -static-libstdc++ %fileName%.c -o "builds/%fullFileName%.exe"
-
-tar -a -c -f "zip/%fullFileName%.zip" *data *builds *rascunho *.pdf *.h *.c *.c functions.c *.cmd
-
-msg * /v /w %fullFileName%.exe foi compilado!
-
-start "RUN" "builds/%fullFileName%.exe"
+:: Envia os arquivos para o repositório remoto na branch especificada
+git push origin main
