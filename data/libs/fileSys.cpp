@@ -7,7 +7,7 @@ FILE *abrirArquivo(char *nomeArq, char *modo) {
         printf("Erro ao abrir o arquivo %s\n", nomeArq);
         exit(1);
     }
-    printf("INFO: Arquivo %s Aberto! Bom uso.\n", nomeArq);
+    printf("\n INFO: Arquivo %s Aberto! Bom uso.\n", nomeArq);
     return arquivo;
 }
 

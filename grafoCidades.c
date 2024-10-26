@@ -229,13 +229,10 @@ void autosave(TGrafo *grafo){
         // Obtém um ponteiro para a cidade atual
         TCidade *cidadeAtual = &grafo->cidades[i];  
         TVizinho *vizinho = cidadeAtual->vizinhos;
-
-        printf(" Cidade: %s,\n", cidadeAtual->nome);
         fWiriteSTRING(arq,cidadeAtual->nome);
 
         // Percorre a lista de vizinhos
         while (vizinho != NULL) {
-            printf(" Vizinho: %s, Distância: %.2f\n", vizinho->nome, vizinho->distancia);
             fWiriteSTRING(arq,vizinho->nome);
             fWiriteINT(arq,vizinho->distancia);
             vizinho = vizinho->prox;  // Avança para o próximo vizinho
@@ -244,8 +241,6 @@ void autosave(TGrafo *grafo){
         fWiriteSTRING(arq,":");
     }
     
-    printf("\n%s",grafo->cidades->nome);
-    // fWiriteSTRING(arq,grafo->cidades->nome);
     fclose(arq);
     printf("\n Auto Save Completo!");
 }
