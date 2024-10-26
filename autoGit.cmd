@@ -47,3 +47,5 @@ git commit -m "Automated commit for %fullFileName%"
 
 :: Envia os arquivos para o repositório remoto na branch especificada
 git push origin main
+
+exit /b 0
