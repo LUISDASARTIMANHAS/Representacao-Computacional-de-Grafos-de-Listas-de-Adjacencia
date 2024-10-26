@@ -23,20 +23,20 @@ void inicializarGrafo(TGrafo *grafo, int capacidade) {
 //=================================================
 // Função para inserir uma cidade no grafo
 void inserirCidade(TGrafo *grafo, string nomeCidade) {
-TCidade *guardaCidades = (TCidade *) realloc(grafo->cidades, grafo->capacidade * sizeof(TCidade));
+    TCidade *guardaCidades = (TCidade *) realloc(grafo->cidades, grafo->capacidade * sizeof(TCidade));
 
-if (buscarCidade(grafo, nomeCidade) != NULL) {
-return;
-}
+    if (buscarCidade(grafo, nomeCidade) != NULL) {
+    return;
+    }
 
-if (grafo->numCidades == grafo->capacidade) {
-grafo->capacidade *= 2;
-grafo->cidades = guardaCidades;
-}
+    if (grafo->numCidades == grafo->capacidade) {
+    grafo->capacidade *= 2;
+    grafo->cidades = guardaCidades;
+    }
 
-strcpy(grafo->cidades[grafo->numCidades].nome, nomeCidade);
-grafo->cidades[grafo->numCidades].vizinhos = NULL;
-grafo->numCidades++;
+    strcpy(grafo->cidades[grafo->numCidades].nome, nomeCidade);
+    grafo->cidades[grafo->numCidades].vizinhos = NULL;
+    grafo->numCidades++;
 }
 
 
@@ -148,8 +148,8 @@ void removerCidade(TGrafo *grafo, char *nomeCidade) {
 
 // Função para inserir uma cidade e seus vizinhos no grafo
 void inserir(TGrafo *grafo, string nomeCidade, string nomeVizinho, double distancia) {
-inserirCidade(grafo, nomeCidade);
-inserirVizinho(grafo,nomeCidade, nomeVizinho, distancia);
+    inserirCidade(grafo, nomeCidade);
+    inserirVizinho(grafo,nomeCidade, nomeVizinho, distancia);
 }
 
 //=================================================
@@ -222,9 +222,32 @@ void exibirCidadeEVizinho(TGrafo *grafo){
 
 void autosave(TGrafo *grafo){
     FILE *arq = abrirArquivo("../data/cidades.txt","w");
+    int i = 0;
 
-    fWiriteSTRING(arq,grafo->cidades->nome);
+    // Loop que percorre o número total de cidades
+    for (i = 0; i < grafo->numCidades; i++) {  
+        // Obtém um ponteiro para a cidade atual
+        TCidade *cidadeAtual = &grafo->cidades[i];  
+        TVizinho *vizinho = cidadeAtual->vizinhos;
+
+        printf(" Cidade: %s,\n", cidadeAtual->nome);
+        fWiriteSTRING(arq,cidadeAtual->nome);
+
+        // Percorre a lista de vizinhos
+        while (vizinho != NULL) {
+            printf(" Vizinho: %s, Distância: %.2f\n", vizinho->nome, vizinho->distancia);
+            fWiriteSTRING(arq,vizinho->nome);
+            fWiriteINT(arq,vizinho->distancia);
+            vizinho = vizinho->prox;  // Avança para o próximo vizinho
+        }
+        // coloca o separador de blocos de cidade
+        fWiriteSTRING(arq,":");
+    }
+    
+    printf("\n%s",grafo->cidades->nome);
+    // fWiriteSTRING(arq,grafo->cidades->nome);
     fclose(arq);
+    printf("\n Auto Save Completo!");
 }
 //=================================================
 void menu(TGrafo *grafo){
@@ -242,6 +265,9 @@ void menu(TGrafo *grafo){
         opc = input();
 
             switch (opc){
+            case 0:
+                printf("\n Saindo e Salvando automaticamente...");
+                break; 
             case 1:
                 cadastrarCidade(grafo);
                 break;
@@ -262,7 +288,6 @@ void menu(TGrafo *grafo){
                 break;
             }
     }
-    printf("\n Saindo e Salvando automaticamente...");
     autosave(grafo);
     exit(0);
 }
