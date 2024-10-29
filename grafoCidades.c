@@ -229,7 +229,7 @@ void exibirCidadeEVizinho(TGrafo *grafo){
 }
 
 void autosave(TGrafo *grafo){
-    FILE *arq = abrirArquivo("../data/cidades.txt","w");
+    FILE *arq = abrirArquivo(ARQUIVOCIDADES,"w");
     int i = 0;
 
     // Loop que percorre o número total de cidades
@@ -298,8 +298,8 @@ void menu(TGrafo *grafo){
 void mapeandoGrafo(TGrafo *grafo){
     inicializarGrafo(grafo, 20);  // Inicializa com uma capacidade de 5 cidades
 
-    // Abre o arquivo "cidades.txt"
-    FILE *arquivo = abrirArquivo("../data/cidades.txt", "r");
+    // Abre o arquivo "cidades"
+    FILE *arquivo = abrirArquivo(ARQUIVOCIDADES, "r");
     // Ler todas as cidades, vizinhos e distâncias
     inserirDadosDoArquivo(grafo,arquivo);
 

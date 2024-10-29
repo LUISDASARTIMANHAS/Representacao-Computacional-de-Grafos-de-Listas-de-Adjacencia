@@ -9,6 +9,7 @@
 #define INICIO "------------INICIO------------"
 #define RESULTADO "------------RESULTADO------------"
 #define CORTE "------------------------"
+#define ARQUIVOCIDADES "data/cidades.txt"
 
 typedef char string[101];
 typedef clock_t processTime;
