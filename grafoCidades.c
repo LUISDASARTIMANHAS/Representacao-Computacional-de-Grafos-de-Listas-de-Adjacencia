@@ -23,17 +23,25 @@ void inicializarGrafo(TGrafo *grafo, int capacidade) {
 //=================================================
 // Função para inserir uma cidade no grafo
 void inserirCidade(TGrafo *grafo, string nomeCidade) {
-    TCidade *guardaCidades = (TCidade *) realloc(grafo->cidades, grafo->capacidade * sizeof(TCidade));
-
+    // Verifica se a cidade já existe
     if (buscarCidade(grafo, nomeCidade) != NULL) {
-    return;
+        return;
     }
 
+    // Verifica se o grafo precisa de mais capacidade
     if (grafo->numCidades == grafo->capacidade) {
-    grafo->capacidade *= 2;
-    grafo->cidades = guardaCidades;
+        grafo->capacidade *= 2; // Dobra a capacidade
+        TCidade *guardaCidades = (TCidade *) realloc(grafo->cidades, grafo->capacidade * sizeof(TCidade));
+        
+        if (guardaCidades == NULL) {
+            printf("Erro ao realocar memória para cidades!\n");
+            exit(1); // Encerra o programa em caso de erro
+        }
+
+        grafo->cidades = guardaCidades; // Atualiza o ponteiro se a realocação for bem-sucedida
     }
 
+    // Insere a nova cidade
     strcpy(grafo->cidades[grafo->numCidades].nome, nomeCidade);
     grafo->cidades[grafo->numCidades].vizinhos = NULL;
     grafo->numCidades++;

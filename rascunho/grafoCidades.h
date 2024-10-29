@@ -33,13 +33,11 @@ typedef struct tipoGrafo {
     int capacidade;              // Capacidade máxima de cidades no grafo (inicialmente alocada)
 } TGrafo;
 
-// Funções
-FILE *abrirArquivo(char *nomeArq, char *modo);
+// Funções que serão implementadas no arquivo .c
 void inicializarGrafo(TGrafo *grafo, int capacidade);
 void inserirCidade(TGrafo *grafo, string nomeCidade);
-void inserirVizinho(TCidade *cidade, char *nomeVizinho, double distancia);
-void inserir(TGrafo *grafo, string nomeCidade, string nomeVizinho, double distancia);
+void inserirVizinho(TGrafo *grafo,string nomeCidade, char *nomeVizinho, double distancia);
 void lerArquivo(TGrafo *grafo, FILE *arquivo);
 TCidade* buscarCidade(TGrafo *grafo, string nomeCidade);
 void exibirGrafo(TGrafo *grafo);
-void destruirGrafo(TGrafo *grafo);
+void removerCidade(TGrafo *grafo, char *nomeCidade);
