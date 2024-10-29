@@ -1,123 +1,380 @@
 Sao Paulo
-Rio de Janeiro
-440
 Campinas
-100
+100.00
+Rio de Janeiro
+440.00
+Rio de Janeiro
+440.00
+Rio de Janeiro
+440.00
+Campinas
+100.00
+Rio de Janeiro
+440.00
 :
 Rio de Janeiro
-Niteroi
-20
 Petropolis
-60
+60.00
+Petropolis
+60.00
+Niteroi
+20.00
+Niteroi
+20.00
 Sao Paulo
-440
+440.00
+Niteroi
+20.00
+Petropolis
+60.00
+Sao Paulo
+440.00
+Niteroi
+20.00
+Petropolis
+60.00
+Sao Paulo
+440.00
+Sao Paulo
+440.00
+:
+Campinas
+Sao Paulo
+100.00
+Sao Paulo
+100.00
+:
+Petropolis
+Teresopolis
+30.00
+Teresopolis
+30.00
+Rio de Janeiro
+60.00
+Niteroi
+60.00
+Teresopolis
+30.00
+Niteroi
+60.00
+Rio de Janeiro
+60.00
+Teresopolis
+30.00
+Niteroi
+60.00
+Niteroi
+60.00
+Rio de Janeiro
+60.00
+Rio de Janeiro
+60.00
 :
 Niteroi
+Petropolis
+60.00
+Petropolis
+60.00
 Rio de Janeiro
-20
-Petropolis
-60
-:
-Petropolis
-Teresopolis
-30
-Niteroi
-60
+20.00
 Rio de Janeiro
-60
-:
-Teresopolis
+20.00
 Petropolis
-30
-Nova Friburgo
-40
+60.00
+Petropolis
+60.00
+Rio de Janeiro
+20.00
+Rio de Janeiro
+20.00
 :
-Nova Friburgo
 Teresopolis
-40
-Cachoeiras de Macacu
-25
-:
-Cachoeiras de Macacu
 Nova Friburgo
-25
-Guapimirim
-35
+40.00
+Nova Friburgo
+40.00
+Petropolis
+30.00
+Petropolis
+30.00
+Nova Friburgo
+40.00
+Nova Friburgo
+40.00
+Petropolis
+30.00
+Petropolis
+30.00
 :
-Guapimirim
+Nova Friburgo
 Cachoeiras de Macacu
-35
-Mage
-20
+25.00
+Cachoeiras de Macacu
+25.00
+Teresopolis
+40.00
+Teresopolis
+40.00
+Cachoeiras de Macacu
+25.00
+Cachoeiras de Macacu
+25.00
+Teresopolis
+40.00
+Teresopolis
+40.00
 :
-Mage
+Cachoeiras de Macacu
 Guapimirim
-20
-Duque de Caxias
-25
+35.00
+Guapimirim
+35.00
+Nova Friburgo
+25.00
+Nova Friburgo
+25.00
+Guapimirim
+35.00
+Guapimirim
+35.00
+Nova Friburgo
+25.00
+Nova Friburgo
+25.00
 :
-Duque de Caxias
+Guapimirim
 Mage
-25
-Nilopolis
-15
+20.00
+Mage
+20.00
+Cachoeiras de Macacu
+35.00
+Cachoeiras de Macacu
+35.00
+Mage
+20.00
+Mage
+20.00
+Cachoeiras de Macacu
+35.00
+Cachoeiras de Macacu
+35.00
 :
-Nilopolis
+Mage
 Duque de Caxias
-15
-Mesquita
-10
+25.00
+Duque de Caxias
+25.00
+Guapimirim
+20.00
+Guapimirim
+20.00
+Duque de Caxias
+25.00
+Duque de Caxias
+25.00
+Guapimirim
+20.00
+Guapimirim
+20.00
 :
-Mesquita
+Duque de Caxias
 Nilopolis
-10
-Belford Roxo
-15
+15.00
+Nilopolis
+15.00
+Mage
+25.00
+Mage
+25.00
+Nilopolis
+15.00
+Nilopolis
+15.00
+Mage
+25.00
+Mage
+25.00
 :
-Belford Roxo
+Nilopolis
 Mesquita
-15
-Sao Joao de Meriti
-10
+10.00
+Mesquita
+10.00
+Duque de Caxias
+15.00
+Duque de Caxias
+15.00
+Mesquita
+10.00
+Mesquita
+10.00
+Duque de Caxias
+15.00
+Duque de Caxias
+15.00
 :
-Sao Joao de Meriti
+Mesquita
 Belford Roxo
-10
-Queimados
-18
+15.00
+Belford Roxo
+15.00
+Nilopolis
+10.00
+Nilopolis
+10.00
+Belford Roxo
+15.00
+Belford Roxo
+15.00
+Nilopolis
+10.00
+Nilopolis
+10.00
 :
-Queimados
+Belford Roxo
 Sao Joao de Meriti
-18
-Japeri
-20
+10.00
+Sao Joao de Meriti
+10.00
+Mesquita
+15.00
+Mesquita
+15.00
+Sao Joao de Meriti
+10.00
+Sao Joao de Meriti
+10.00
+Mesquita
+15.00
+Mesquita
+15.00
 :
-Japeri
+Sao Joao de Meriti
 Queimados
-20
-Paracambi
-15
+18.00
+Queimados
+18.00
+Belford Roxo
+10.00
+Belford Roxo
+10.00
+Queimados
+18.00
+Queimados
+18.00
+Belford Roxo
+10.00
+Belford Roxo
+10.00
 :
-Paracambi
+Queimados
 Japeri
-15
-Mendes
-25
+20.00
+Japeri
+20.00
+Sao Joao de Meriti
+18.00
+Sao Joao de Meriti
+18.00
+Japeri
+20.00
+Japeri
+20.00
+Sao Joao de Meriti
+18.00
+Sao Joao de Meriti
+18.00
 :
-Mendes
+Japeri
 Paracambi
-25
-Paty do Alferes
-20
+15.00
+Paracambi
+15.00
+Queimados
+20.00
+Queimados
+20.00
+Paracambi
+15.00
+Paracambi
+15.00
+Queimados
+20.00
+Queimados
+20.00
 :
-Paty do Alferes
+Paracambi
 Mendes
-20
+25.00
+Mendes
+25.00
+Japeri
+15.00
+Japeri
+15.00
+Mendes
+25.00
+Mendes
+25.00
+Japeri
+15.00
+Japeri
+15.00
+:
+Mendes
+Paty do Alferes
+20.00
+Paty do Alferes
+20.00
+Paracambi
+25.00
+Paracambi
+25.00
+Paty do Alferes
+20.00
+Paty do Alferes
+20.00
+Paracambi
+25.00
+Paracambi
+25.00
+:
+Paty do Alferes
 Vassouras
-30
+30.00
+Vassouras
+30.00
+Mendes
+20.00
+Mendes
+20.00
+Vassouras
+30.00
+Vassouras
+30.00
+Mendes
+20.00
+Mendes
+20.00
 :
 Vassouras
-Paty do Alferes
-30
 Barra do Pirai
-40
+40.00
+Paty do Alferes
+30.00
+Paty do Alferes
+30.00
+Barra do Pirai
+40.00
+Paty do Alferes
+30.00
+Paty do Alferes
+30.00
+:
+Barra do Pirai
+Vassouras
+40.00
+Vassouras
+40.00
+:
