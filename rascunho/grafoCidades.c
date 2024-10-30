@@ -1,6 +1,6 @@
 // Feito por: Lucas Garcia E Luis Augusto
 #include "grafoCidades.h"
-#include "data/libs/fileSys.cpp"
+#include "../data/libs/fileSys.cpp"
 // Função para exibir todas as cidades e seus vizinhos
 void exibirGrafo(TGrafo *grafo) {
     for (int i = 0; i < grafo->numCidades; i++) {
