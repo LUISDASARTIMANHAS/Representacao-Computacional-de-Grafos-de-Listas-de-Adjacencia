@@ -1,8 +1,20 @@
 :: Criação das pastas, verificando se cada uma não existe
-if not exist "builds" mkdir "builds"
-if not exist "rascunho" mkdir "rascunho"
-if not exist "zip" mkdir "zip"
-if not exist "data" mkdir "data"
+if not exist "builds" (
+    mkdir "builds"
+    "inicialization" >> builds/builds.config
+)
+if not exist "rascunho" (
+    mkdir "rascunho"
+    "inicialization" >> rascunho/rascunho.config
+)
+if not exist "data" (
+    mkdir "data"
+    "inicialization" >> data/data.config
+)
+if not exist "zip" (
+    mkdir "zip"
+    "inicialization" >> zip/zip.config
+)
 
 :: Criação do arquivo .gitignore com o conteúdo desejado, caso não exista
 if not exist ".gitignore" (
